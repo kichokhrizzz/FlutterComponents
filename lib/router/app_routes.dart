@@ -9,24 +9,34 @@ class AppRoutes {
   static final menuOptions = <MenuOption> [
     // TODO: Borrar Home
 
-    MenuOption(route: 'home', name: 'Home Screen', screen: const HomeScreen(), icon: Icons.home),
+    //MenuOption(route: 'home', name: 'Home Screen', screen: const HomeScreen(), icon: Icons.home),
     MenuOption(route: 'listview1', name: 'ListView Tipo 1', screen: const Listview1Screen(), icon: Icons.list),
     MenuOption(route: 'listview2', name: 'ListView Tipo 2', screen: const Listview2Screen(), icon: Icons.list_sharp),
-    MenuOption(route: 'home', name: 'Home Screen', screen: const HomeScreen(), icon: Icons.home),
     MenuOption(route: 'alert', name: 'Alert Screen', screen: const AlertScreen(), icon: Icons.add_alert),
-    MenuOption(route: 'card', name: 'Card Screen', screen: const CardScreen(), icon: Icons.card_membership_rounded)
+    MenuOption(route: 'card', name: 'Card Screen', screen: const CardScreen(), icon: Icons.card_membership_rounded),
+    MenuOption(route: 'avatar', name: 'Avatar Screen', screen: const AvatarScreen(), icon: Icons.supervised_user_circle),
+    MenuOption(route: 'animated', name: 'Animated Container', screen: const AnimatedScreen(), icon: Icons.animation)
+
 
   ];
 
-  static Map<String, Widget Function(BuildContext)> routes ={
+  static Map<String, Widget Function (BuildContext)> getAppRoutes(){
 
-    'home' : ( BuildContext context ) => const HomeScreen(),
-    'listview1' : ( BuildContext context ) => const Listview1Screen(),
-    'listview2' : ( BuildContext context ) => const Listview2Screen(),
-    'alert' : ( BuildContext context ) => const AlertScreen(),
-    'card' : ( BuildContext context ) => const CardScreen()
+    Map<String, Widget Function (BuildContext)> appRoutes = {};
 
-  };
+    appRoutes.addAll({'home' : (BuildContext context) => const HomeScreen()});
+
+    for (final option in menuOptions) {
+      
+      appRoutes.addAll({ option.route : ( BuildContext context ) => option.screen });
+
+    }
+
+    return appRoutes;
+
+  }
+
+  
 
   static onGenerateRoute (RouteSettings settings) {
         
